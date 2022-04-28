@@ -1,5 +1,15 @@
-0.0.1 (28 April 2022)
+0.0.1 C2 (28 April 2022)
+changelog will now store commits
+Added dependencies.json
+-Shows all dependencies, including standard library.
 
+0.0.1 C1 (28 April 2022)
+Added changelog
+-Stores changelog for program
+Added compile.sh
+-Compiles program and puts it in /home/pi/exe, then removes ./build and ./dist
+
+0.0.1 (28 April 2022)
 Added program
 -Checks disk
 --Write size is 1 MB

@@ -1,0 +1,29 @@
+{
+    "diskspeedcheck.py" : {
+        "sys" : {
+            "builtin" : true
+        },
+        "os.py" : {
+            "abc" : {
+                "nodep" : true
+            },
+            "sys" : {
+                "builtin":true
+            },
+            "stat" : {
+                "nodep" : true
+            }
+        },
+        "datetime.py":{
+            "time" : {
+                "builtin" : true
+            },
+            "math" : {
+                "builtin" : true
+            },
+            "sys" : {
+                "builtin":true
+            }
+        }
+    }
+}
