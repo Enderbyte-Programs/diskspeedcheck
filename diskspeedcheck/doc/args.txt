@@ -1,0 +1,5 @@
+Arguments (as of 0.0.1):
+
+--silent (alias -s) (added 0.0.1) Does not print anything except for result, including errors.
+
+--verbose (alias -v) (added 0.0.1) Prints detailed reports of what is going on in addition to a timestamp in milliseconds

@@ -1,0 +1,7 @@
+0.0.1 (28 April 2022)
+
+Added program
+-Checks disk
+--Write size is 1 MB
+-Added --silent Argument (alias -s)
+-Added --verbose Argument (alias -v)
