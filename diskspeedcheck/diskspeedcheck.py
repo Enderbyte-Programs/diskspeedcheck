@@ -29,10 +29,10 @@ def pverb(data):
         print(data)
 pverb("Checking arguments")
 if "-s" in args or "--silent" in args:
-    us = True
-else:
     us = False
-if uv and us:
+else:
+    us = True
+if uv and not us:
     raise RuntimeError("verbose and silent may not be used together!")
 
 #Defining variables
@@ -42,9 +42,34 @@ dir = os.getcwd()
 fname = "__speedtest__"
 assembledname = dir + "/" + fname #For ease of writing
 writeable = "x"*wsize
+
+pverb("Scanning arguments")
+#Scanning for args part 2
+if "-d" in args:
+    ndir = args[args.index("-d")+1]
+    if os.path.isdir(ndir):
+        dir = ndir
+        assembledname = dir + "/" + fname #For ease of writing
+    else:
+        if us:
+            print(f"ERROR provided directory {ndir} is not valid")
+        sys.exit(3)
+
+if "--directory" in args: #Seperate due to .replace() issues
+    ndir = args[args.index("--directory")+1]
+    if os.path.isdir(ndir):
+        dir = ndir
+        assembledname = dir + "/" + fname #For ease of writing
+    else:
+        if us:
+            print(f"ERROR provided directory {ndir} is not valid")
+        sys.exit(3)
+
 pverb("Performing final checks")
 if os.path.isfile(assembledname):
-    os.remove(assembledname)
+    if us:
+        print("ERROR File already exists. To surpress this and overwrite the file, run with --surpressfile")#To add later
+    sys.exit(4)
 pverb("Writing file")
 start = datetime.now()
 try:
@@ -53,11 +78,11 @@ try:
 except FileExistsError:
     if us:
         print("ERROR File already exists")
-    sys.exit("-1")
+    sys.exit(4)
 except PermissionError:
     if us:
         print("ERROR Permission denied")
-    sys.exit(-1)
+    sys.exit(2)
 end = datetime.now()
 pverb("Removing file")
 os.remove(assembledname)

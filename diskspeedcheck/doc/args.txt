@@ -1,5 +1,9 @@
-Arguments (as of 0.0.1):
+Arguments (as of v4):
 
---silent (alias -s) (added 0.0.1) Does not print anything except for result, including errors.
+--silent (alias -s) (added 1) Does not print anything except for result, including errors. (errors are not printed)
 
---verbose (alias -v) (added 0.0.1) Prints detailed reports of what is going on in addition to a timestamp in milliseconds
+--verbose (alias -v) (added 1) Prints detailed reports of what is going on in addition to a timestamp in milliseconds
+
+--directory (alias -d) (added 4) Changes directory to write 1 MB speedtest file. Directory is provided one space after the --directory or -d and must use quotes if name has spaces
+EXAMPLE: diskspeedcheck --directory /home/me/Downloads
+EXAMPLE: diskspeedcheck --directory "/home/me/Documents/My Project"

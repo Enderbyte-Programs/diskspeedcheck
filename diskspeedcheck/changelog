@@ -1,15 +1,25 @@
-0.0.1 C2 (28 April 2022)
+4 (30 April 2022)
+changed versioning system to linear
+Added -d argument
+-Alias --directory
+-Sets the directory to write the file
+--Provided one space after the -d or --directory
+-example: diskspeedcheck -v -d /path/to/custom/directory
+Added custom exit codes
+-Review ./doc/exitcodes.txt for info
+
+3 (28 April 2022)
 changelog will now store commits
 Added dependencies.json
 -Shows all dependencies, including standard library.
 
-0.0.1 C1 (28 April 2022)
+2 (28 April 2022)
 Added changelog
 -Stores changelog for program
 Added compile.sh
 -Compiles program and puts it in /home/pi/exe, then removes ./build and ./dist
 
-0.0.1 (28 April 2022)
+1 (28 April 2022)
 Added program
 -Checks disk
 --Write size is 1 MB
