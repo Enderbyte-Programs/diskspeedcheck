@@ -1,3 +1,11 @@
+5 (30 April 2022)
+speed is now rounded to 3 decimal places unless --noround is applied [to be added at a later date]
+Added -f
+-Alias is --file
+-Changes file name that the test is administered on
+Removed setup.py because it is useless
+Added tree.txt to show hierarchy
+
 4 (30 April 2022)
 changed versioning system to linear
 Added -d argument

@@ -7,3 +7,7 @@ Arguments (as of v4):
 --directory (alias -d) (added 4) Changes directory to write 1 MB speedtest file. Directory is provided one space after the --directory or -d and must use quotes if name has spaces
 EXAMPLE: diskspeedcheck --directory /home/me/Downloads
 EXAMPLE: diskspeedcheck --directory "/home/me/Documents/My Project"
+
+--file (alias -f) (added 5) Changes file to write teh 1 MB to. Name is provided 1 space after the switch and quotes must be used if spaces
+EXAMPLE: diskspeedcheck --file myfile.txt writes to {CWD}/myfile.txt
+EXAMPLE: diskspeedcheck --directory /home/me/Documents --file "this is a file.file"

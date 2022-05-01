@@ -1,0 +1,10 @@
+.
+├── changelog
+├── compile.sh
+├── diskspeedcheck.py
+├── diskspeedcheck.spec
+└── doc
+    ├── args.txt
+    ├── dependencies.json
+    ├── exitcodes.txt
+    └── tree.txt

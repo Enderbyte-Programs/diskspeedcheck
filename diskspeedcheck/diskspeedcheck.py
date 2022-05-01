@@ -65,6 +65,13 @@ if "--directory" in args: #Seperate due to .replace() issues
             print(f"ERROR provided directory {ndir} is not valid")
         sys.exit(3)
 
+if "-f" in args:
+    fname = args[args.index("-f")+1]
+    assembledname = dir + "/" + fname
+if "--file" in args:
+    fname = args[args.index("--file")+1]
+    assembledname = dir + "/" + fname
+
 pverb("Performing final checks")
 if os.path.isfile(assembledname):
     if us:
@@ -92,6 +99,6 @@ speed = speed.total_seconds()*1000
 dspeed = 1000 / speed
 pverb("Printing results")
 print(f"Wrote {wsize/1000} KB to the disk in {speed} milliseconds.")
-print(f"Speed is {dspeed} MB/s")
+print(f"Speed is {round(dspeed,3)} MB/s")
 pverb("Done")
 sys.exit(0)
