@@ -7,3 +7,4 @@ These are all of the exit codes that diskspeedcheck can provide. Each one means 
 512: Permissions error: Could not write to file. To avoid this run as admin if on Windows and with prefix sudo if on Linux
 768: Provided directory is invalid
 1024: Requested write file is already there (supress with --surpressfile) [COMING AT LATER TIME]
+1280: Invalid integer provided

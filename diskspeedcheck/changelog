@@ -1,3 +1,12 @@
+9 (1 May 2022)
+Added exit code 1280
+-Used when invalid integer is provided
+Moved writeable assembly to after argument check
+Added -si argument
+-Alias --size
+-Sets writeable size
+write time is now rounded unless --noround is used
+
 8 (1 May 2022)
 Added line in compile.sh to remove old executable
 Added --noremove argument

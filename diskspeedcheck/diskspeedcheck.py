@@ -9,7 +9,7 @@ def millis():
    return ms
 
 #Package stuff
-__version__ = "8"
+__version__ = "9"
 
 #Getting arguments and removing filename
 args = sys.argv
@@ -40,7 +40,7 @@ wsize = 1000000 #Default of 1 MB but may change later
 dir = os.getcwd()
 fname = "__speedtest__"
 assembledname = dir + "/" + fname #For ease of writing
-writeable = "x"*wsize
+diffval = 1 #Placeholder incase -s is not used
 
 pverb("Scanning arguments")
 #Scanning for args part 2
@@ -71,12 +71,39 @@ if "--file" in args:
     fname = args[args.index("--file")+1]
     assembledname = dir + "/" + fname
 
+if "-si" in args: #Avoid conflicts with -s silent
+    nwsize = args[args.index("-si")+1]
+    try:
+        nwsize = int(nwsize)
+    except:
+        if us:
+            print("Invalid size")
+        sys.exit(5)
+    else:
+        wsize = nwsize
+        diffval = 1000000/wsize
+
+if "--size" in args:
+    nwsize = args[args.index("--size")+1]
+    try:
+        nwsize = int(nwsize)
+    except:
+        if us:
+            print("Invalid size")
+        sys.exit(5)
+    else:
+        wsize = nwsize
+        diffval = 1000000/wsize
+
+writeable = "x"*wsize
 pverb("Performing final checks")
 if os.path.isfile(assembledname) and not "--surpressfile" in args:
     if us:
-        print("ERROR File already exists. To surpress this and overwrite the file, run with --surpressfile")#To add later
+        print("ERROR File already exists. To surpress this and overwrite the file, run with --surpressfile")
     sys.exit(4)
 pverb("Writing file")
+
+
 start = datetime.now()
 try:
     with open(assembledname,"w+") as f:
@@ -86,6 +113,8 @@ except PermissionError:
         print("ERROR Permission denied")
     sys.exit(2)
 end = datetime.now()
+
+
 if not "--noremove" in args:
     pverb("Removing file")
     os.remove(assembledname)
@@ -93,11 +122,14 @@ pverb("Calculating")
 speed = end - start
 speed = speed.total_seconds()*1000
 dspeed = 1000 / speed
+dspeed = dspeed / diffval
 pverb("Printing results")
-print(f"Wrote {wsize/1000} KB to the disk in {speed} milliseconds.")
+
 if "--noround" in args:
     print(f"Speed is {dspeed} MB/s")
+    print(f"Wrote {wsize/1000} KB to the disk in {speed} milliseconds.")
 else:
     print(f"Speed is {round(dspeed,3)} MB/s")
+    print(f"Wrote {wsize/1000} KB to the disk in {round(speed,3)} milliseconds.")
 pverb("Done")
 sys.exit(0)

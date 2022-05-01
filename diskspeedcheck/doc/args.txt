@@ -5,15 +5,19 @@ Arguments (as of v4):
 --verbose (alias -v) (added 1) Prints detailed reports of what is going on in addition to a timestamp in milliseconds
 
 --directory (alias -d) (added 4) Changes directory to write 1 MB speedtest file. Directory is provided one space after the --directory or -d and must use quotes if name has spaces
-EXAMPLE: diskspeedcheck --directory /home/me/Downloads
-EXAMPLE: diskspeedcheck --directory "/home/me/Documents/My Project"
+EXAMPLE: $diskspeedcheck --directory /home/me/Downloads
+EXAMPLE: $diskspeedcheck --directory "/home/me/Documents/My Project"
 
 --file (alias -f) (added 5) Changes file to write teh 1 MB to. Name is provided 1 space after the switch and quotes must be used if spaces
-EXAMPLE: diskspeedcheck --file myfile.txt writes to {CWD}/myfile.txt
-EXAMPLE: diskspeedcheck --directory /home/me/Documents --file "this is a file.file"
+EXAMPLE: $diskspeedcheck --file myfile.txt //writes to {CWD}/myfile.txt
+EXAMPLE: $diskspeedcheck --directory /home/me/Documents --file "this is a file.file" //Writes to /home/me/Documents/this is a file.file
 
 --surpressfile (added 6) Ignores if file exissts and overwrites it instead of throwing an error
 
 --noround (added 7) Does not round speed
 
 --noremove (added 8) Does not remove speedtest file wherever it may be.
+
+--size (alias -si) Changes the file size of the writeable. Size must be an integer in bytes provided one space after the switch
+EXAMPLE $diskspeedcheck -si 500000 //Writes a file of 500 KB to test. Calculation is ran to provide answer in MB/s
+EXAMPLE $diskspeedcheck --size 44837564 //odd numbers are allowed but no floating points.
