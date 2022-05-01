@@ -1,3 +1,8 @@
+8 (1 May 2022)
+Added line in compile.sh to remove old executable
+Added --noremove argument
+-Does not remove speedtest file
+
 7 (30 April 2022)
 Added --noround
 -Does not round speed

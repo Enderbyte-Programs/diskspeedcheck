@@ -15,3 +15,5 @@ EXAMPLE: diskspeedcheck --directory /home/me/Documents --file "this is a file.fi
 --surpressfile (added 6) Ignores if file exissts and overwrites it instead of throwing an error
 
 --noround (added 7) Does not round speed
+
+--noremove (added 8) Does not remove speedtest file wherever it may be.

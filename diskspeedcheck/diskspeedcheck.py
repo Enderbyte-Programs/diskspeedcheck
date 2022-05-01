@@ -9,7 +9,7 @@ def millis():
    return ms
 
 #Package stuff
-__version__ = "7"
+__version__ = "8"
 
 #Getting arguments and removing filename
 args = sys.argv
@@ -86,8 +86,9 @@ except PermissionError:
         print("ERROR Permission denied")
     sys.exit(2)
 end = datetime.now()
-pverb("Removing file")
-os.remove(assembledname)
+if not "--noremove" in args:
+    pverb("Removing file")
+    os.remove(assembledname)
 pverb("Calculating")
 speed = end - start
 speed = speed.total_seconds()*1000
