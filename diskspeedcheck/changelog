@@ -1,3 +1,9 @@
+10 (1 May 2022)
+Added custom exception handler
+-Does absolutely nothing but exit with code 256 (General exception)
+-Only used if --silent or -s is used.
+Removed first checking args verbose because it will have issue with --silent
+
 9 (1 May 2022)
 Added exit code 1280
 -Used when invalid integer is provided

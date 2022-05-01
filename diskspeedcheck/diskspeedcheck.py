@@ -8,8 +8,11 @@ def millis():
    ms = (dt.days * 24 * 60 * 60 + dt.seconds) * 1000 + dt.microseconds / 1000.0
    return ms
 
+def silent_exc(type,value,traceback):
+    sys.exit(1)
+
 #Package stuff
-__version__ = "9"
+__version__ = "10"
 
 #Getting arguments and removing filename
 args = sys.argv
@@ -26,9 +29,9 @@ def pverb(data):
     if uv:
         print(millis(),end=" ")
         print(data)
-pverb("Checking arguments")
 if "-s" in args or "--silent" in args:
     us = False
+    sys.excepthook = silent_exc
 else:
     us = True
 if uv and not us:
