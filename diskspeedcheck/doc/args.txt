@@ -11,3 +11,5 @@ EXAMPLE: diskspeedcheck --directory "/home/me/Documents/My Project"
 --file (alias -f) (added 5) Changes file to write teh 1 MB to. Name is provided 1 space after the switch and quotes must be used if spaces
 EXAMPLE: diskspeedcheck --file myfile.txt writes to {CWD}/myfile.txt
 EXAMPLE: diskspeedcheck --directory /home/me/Documents --file "this is a file.file"
+
+--surpressfile (added 6) Ignores if file exissts and overwrites it instead of throwing an error

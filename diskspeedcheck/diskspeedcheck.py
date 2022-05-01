@@ -1,7 +1,6 @@
 import sys
 import os
 from datetime import datetime
-from datetime import timedelta
 
 start_time = datetime.now()
 def millis():
@@ -10,7 +9,7 @@ def millis():
    return ms
 
 #Package stuff
-__version__ = "0.0.1"
+__version__ = "6"
 
 #Getting arguments and removing filename
 args = sys.argv
@@ -73,19 +72,15 @@ if "--file" in args:
     assembledname = dir + "/" + fname
 
 pverb("Performing final checks")
-if os.path.isfile(assembledname):
+if os.path.isfile(assembledname) and not "--surpressfile" in args:
     if us:
         print("ERROR File already exists. To surpress this and overwrite the file, run with --surpressfile")#To add later
     sys.exit(4)
 pverb("Writing file")
 start = datetime.now()
 try:
-    with open(assembledname,"x") as f:
+    with open(assembledname,"w+") as f:
         f.write(writeable)
-except FileExistsError:
-    if us:
-        print("ERROR File already exists")
-    sys.exit(4)
 except PermissionError:
     if us:
         print("ERROR Permission denied")
