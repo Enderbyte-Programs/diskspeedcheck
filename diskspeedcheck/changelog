@@ -1,3 +1,7 @@
+7 (30 April 2022)
+Added --noround
+-Does not round speed
+
 6 (30 April 2022)
 Removed second check if file exists arg
 changed write mode from x to w+

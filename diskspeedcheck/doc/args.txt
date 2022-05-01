@@ -13,3 +13,5 @@ EXAMPLE: diskspeedcheck --file myfile.txt writes to {CWD}/myfile.txt
 EXAMPLE: diskspeedcheck --directory /home/me/Documents --file "this is a file.file"
 
 --surpressfile (added 6) Ignores if file exissts and overwrites it instead of throwing an error
+
+--noround (added 7) Does not round speed

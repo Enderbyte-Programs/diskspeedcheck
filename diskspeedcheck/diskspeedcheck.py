@@ -9,7 +9,7 @@ def millis():
    return ms
 
 #Package stuff
-__version__ = "6"
+__version__ = "7"
 
 #Getting arguments and removing filename
 args = sys.argv
@@ -94,6 +94,9 @@ speed = speed.total_seconds()*1000
 dspeed = 1000 / speed
 pverb("Printing results")
 print(f"Wrote {wsize/1000} KB to the disk in {speed} milliseconds.")
-print(f"Speed is {round(dspeed,3)} MB/s")
+if "--noround" in args:
+    print(f"Speed is {dspeed} MB/s")
+else:
+    print(f"Speed is {round(dspeed,3)} MB/s")
 pverb("Done")
 sys.exit(0)
