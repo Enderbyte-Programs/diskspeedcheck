@@ -23,3 +23,8 @@ EXAMPLE $diskspeedcheck -si 500000 //Writes a file of 500 KB to test. Calculatio
 EXAMPLE $diskspeedcheck --size 44837564 //odd numbers are allowed but no floating points.
 
 -e (alias --excludefmk) Excludes file creation from total time
+
+-a (no alias) Forces test to run multiple times and averages the results. If no valid integer is provided 1 space after, it goes with 10.
+EXAMPLE: $diskspeedcheck -a 78 //Runs test 78 times and returns average result
+EXAMPLE: $diskspeedcheck -a //Runs test 10 times since no value was provided
+EXAMPLE: $diskspeedcheck -a udsf //Value is ignored and is run 10 times
