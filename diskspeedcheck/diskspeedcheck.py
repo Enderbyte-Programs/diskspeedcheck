@@ -107,16 +107,27 @@ if os.path.isfile(assembledname) and not "--surpressfile" in args:
 pverb("Writing file")
 
 
-start = datetime.now()
-try:
-    with open(assembledname,"w+") as f:
-        f.write(writeable)
-except PermissionError:
-    if us:
-        print("ERROR Permission denied")
-    sys.exit(2)
-end = datetime.now()
-
+if "--excludefmk" in args or "-e" in args:
+    pverb("Excluding file make")
+    try:
+        with open(assembledname,"w+") as f:
+            start = datetime.now()
+            f.write(writeable)
+            end = datetime.now()
+    except PermissionError:
+        if us:
+            print("ERROR Permission denied")
+        sys.exit(2)
+else:
+    start = datetime.now()
+    try:
+        with open(assembledname,"w+") as f:
+            f.write(writeable)           
+    except PermissionError:
+        if us:
+            print("ERROR Permission denied")
+        sys.exit(2)
+    end = datetime.now()
 
 if not "--noremove" in args:
     pverb("Removing file")

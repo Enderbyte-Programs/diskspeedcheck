@@ -21,3 +21,5 @@ EXAMPLE: $diskspeedcheck --directory /home/me/Documents --file "this is a file.f
 --size (alias -si) Changes the file size of the writeable. Size must be an integer in bytes provided one space after the switch
 EXAMPLE $diskspeedcheck -si 500000 //Writes a file of 500 KB to test. Calculation is ran to provide answer in MB/s
 EXAMPLE $diskspeedcheck --size 44837564 //odd numbers are allowed but no floating points.
+
+-e (alias --excludefmk) Excludes file creation from total time

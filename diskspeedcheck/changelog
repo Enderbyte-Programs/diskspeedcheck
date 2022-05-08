@@ -1,3 +1,8 @@
+11 (8 May 2022)
+Added -e
+-Alias --excludefmk
+-Excludes file creation from total time
+
 10 (1 May 2022)
 Added custom exception handler
 -Does absolutely nothing but exit with code 256 (General exception)
