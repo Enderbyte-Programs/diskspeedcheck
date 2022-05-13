@@ -1,0 +1,22 @@
+List of functions in diskspeedcheck
+
+silentexc()
+Args:
+type (placeholder)
+value (placeholder)
+traceback (placeholder)
+Purpose: To exit silently when error is encountered
+Lines: 6-7
+
+average(ltba,errors="halt")
+Args:
+ltba:
+type:
+list, tuple
+errors:
+type:
+string
+default:
+"halt"
+
+Purpose: To average the list of tuple provided. If errors is halt it throws a type error. If it is skip it skips over error values

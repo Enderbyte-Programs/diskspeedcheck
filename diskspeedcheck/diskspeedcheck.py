@@ -2,16 +2,11 @@ import sys
 import os
 from datetime import datetime
 import logging
-start_time = datetime.now()
-def millis():
-   dt = datetime.now() - start_time
-   ms = (dt.days * 24 * 60 * 60 + dt.seconds) * 1000 + dt.microseconds / 1000.0
-   return ms
+
 def silent_exc(type,value,traceback):
     sys.exit(1)
 #Package stuff
-__version__ = "1.0.1"
-__doc__ = """Diskspeedcheck is a small utility that checks your disk's write speed. It is highly customizeable."""
+__version__ = "1.0.2"
 #Getting arguments and removing filename
 args = sys.argv
 del args[0]
