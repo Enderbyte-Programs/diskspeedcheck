@@ -1,3 +1,10 @@
+15 (15 May 2022) [1.0.3]
+Fixed occasional ZeroDivision issue
+Changed default logging to WARN
+
+14 (14 May 2022) [1.0.2]
+Removed useless code
+
 13 (8 May 2022) [1.0.1]
 Changed logging to logging library
 

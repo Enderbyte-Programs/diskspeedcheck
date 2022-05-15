@@ -1,0 +1,11 @@
+When looking at the log on modern PCs (especially when run -a with a high number) you may see "WARN invalid test". What is an invalid test?
+
+For some reason, winodws occasionally mistakenly returns a value that equals the same as the start. This is how the code works
+
+[get start time]
+[write file]
+[get end time]
+
+IN this case, when the value is divided, it crashes because it is dividing by zero. Starting in 1.0.3, if a zerodivision error is detected, it reruns the test until it doesn't get that
+Known issues:
+Very common when using very small --size value
