@@ -1,4 +1,4 @@
-Arguments (as of v4):
+Arguments (as of v1.2.0):
 
 --silent (alias -s) (added 1) Does not print anything except for result, including errors. (errors are not printed)
 
@@ -28,3 +28,11 @@ EXAMPLE $diskspeedcheck --size 44837564 //odd numbers are allowed but no floatin
 EXAMPLE: $diskspeedcheck -a 78 //Runs test 78 times and returns average result
 EXAMPLE: $diskspeedcheck -a //Runs test 10 times since no value was provided
 EXAMPLE: $diskspeedcheck -a udsf //Value is ignored and is run 10 times
+
+--stricterror (no alias) Instead of surpressing errors and retrying, throws exception immediatly. Does not print anything if --silent (-s) is used
+EXAMPLE: $diskspeedcheck -a -1 --stricterror
+RETURNS: 0.0 ERROR Negative values are not allowed!
+EXAMPLE: $diskspeedcheck -si -1 --stricterror --silent
+RETURNS: (nothing, as silent was used)
+
+--help (alias /?) Shows help menu and this file (This is the only argument that requires further user interaction before returning to the command line)

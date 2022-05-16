@@ -6,10 +6,59 @@ import logging
 def silent_exc(type,value,traceback):
     sys.exit(1)
 #Package stuff
-__version__ = "1.0.3"
+__version__ = "1.2.0"
+__help__ = """
+Diskspeedcheck is a small utility that helps you check your diskspeed.
+
+Arguments (as of v1.2.0):
+
+--silent (alias -s) (added 1) Does not print anything except for result, including errors. (errors are not printed)
+
+--verbose (alias -v) (added 1) Prints detailed reports of what is going on in addition to a timestamp in milliseconds
+
+--directory (alias -d) (added 4) Changes directory to write 1 MB speedtest file. Directory is provided one space after the --directory or -d and must use quotes if name has spaces
+EXAMPLE: $diskspeedcheck --directory /home/me/Downloads
+EXAMPLE: $diskspeedcheck --directory "/home/me/Documents/My Project"
+
+--file (alias -f) (added 5) Changes file to write teh 1 MB to. Name is provided 1 space after the switch and quotes must be used if spaces
+EXAMPLE: $diskspeedcheck --file myfile.txt //writes to {CWD}/myfile.txt
+EXAMPLE: $diskspeedcheck --directory /home/me/Documents --file "this is a file.file" //Writes to /home/me/Documents/this is a file.file
+
+--surpressfile (added 6) Ignores if file exissts and overwrites it instead of throwing an error
+
+--noround (added 7) Does not round speed
+
+--noremove (added 8) Does not remove speedtest file wherever it may be.
+
+--size (alias -si) Changes the file size of the writeable. Size must be an integer in bytes provided one space after the switch
+EXAMPLE $diskspeedcheck -si 500000 //Writes a file of 500 KB to test. Calculation is ran to provide answer in MB/s
+EXAMPLE $diskspeedcheck --size 44837564 //odd numbers are allowed but no floating points.
+
+-e (alias --excludefmk) Excludes file creation from total time
+
+-a (no alias) Forces test to run multiple times and averages the results. If no valid integer is provided 1 space after, it goes with 10.
+EXAMPLE: $diskspeedcheck -a 78 //Runs test 78 times and returns average result
+EXAMPLE: $diskspeedcheck -a //Runs test 10 times since no value was provided
+EXAMPLE: $diskspeedcheck -a udsf //Value is ignored and is run 10 times
+
+--stricterror (no alias) Instead of surpressing errors and retrying, throws exception immediatly. Does not print anything if --silent (-s) is used
+EXAMPLE: $diskspeedcheck -a -1 --stricterror
+RETURNS: 0.0 ERROR Negative values are not allowed!
+EXAMPLE: $diskspeedcheck -si -1 --stricterror --silent
+RETURNS: (nothing, as silent was used)
+
+--help (alias /?) Shows help menu and this file (This is the only argument that requires further user interaction before returning to the command line)
+"""
 #Getting arguments and removing filename
 args = sys.argv
 del args[0]
+
+if "--help" in args or "/?" in args or "-h" in args:
+    print("Diskspeedcheck Help")
+    print(__help__)
+    input("Press enter when you are finished...")
+    sys.exit(0)
+
 #Scanning args phase 1
 if "-v" in args or "--verbose" in args:
     uv = True
@@ -36,9 +85,13 @@ if "-s" in args or "--silent" in args:
     logging.basicConfig(level=logging.CRITICAL,format="%(relativeCreated)s %(levelname)s %(message)s")
 else:
     us = True
-    logging.basicConfig(level=logging.WARNING,format="%(relativeCreated)s %(levelname)s %(message)s")
+    logging.basicConfig(level=logging.ERROR,format="%(relativeCreated)s %(levelname)s %(message)s")
 if uv and not us:
     raise RuntimeError("verbose and silent may not be used together!")
+se = False
+if "--stricterror" in args:
+    se = True
+
 #Defining variables
 logging.info("Preparing variables")
 wsize = 1000000 #Default of 1 MB but may change later
@@ -74,6 +127,8 @@ if "-si" in args: #Avoid conflicts with -s silent
     nwsize = args[args.index("-si")+1]
     try:
         nwsize = int(nwsize)
+        if nwsize < 1:
+            raise ValueError()
     except:
         if us:
             logging.error("Invalid size")
@@ -85,9 +140,11 @@ if "--size" in args:
     nwsize = args[args.index("--size")+1]
     try:
         nwsize = int(nwsize)
-    except:
+        if nwsize < 1:
+            raise ValueError()
+    except ValueError:
         if us:
-            logging.error("Invalid size")
+            logging.error("Invalid size provided!")
         sys.exit(5)
     else:
         wsize = nwsize
@@ -101,10 +158,23 @@ logging.info("Writing file")
 if "-a" in args:
     try:
         aloop = int(args[args.index("-a")+1])
+        if aloop < 1:
+            logging.error("Negative values are not allowed!")
+            if se:
+                sys.exit(5)
+            raise ValueError("Negative values are not allowed!")
     except IndexError:
+        if se:
+            logging.error("Please provide an average value")
+            if not us:
+                sys.exit(5)
         logging.warning("No average value provided, going with 10")
         aloop = 10
     except ValueError:
+        if se:
+            logging.error("Please provide an average value")
+            if not us:
+                sys.exit(5)
         logging.warning("Invalid average value provided, going with 10")
         aloop = 10
     speeds = []

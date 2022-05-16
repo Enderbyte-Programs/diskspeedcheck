@@ -1,3 +1,20 @@
+17 (16 May 2022) [1.2.0]
+Added negative integer prevention to --size and -si
+Changed from wildcard except to ValueError()
+Added --help
+-Alias /?
+-Shows help
+Removed invalid tests file
+Removed functions.txt file
+
+16 (16 May 2022) [1.1.0]
+Reset default logging level to ERROR due to spam because of 1.0.3 solution
+Added negative handling to -a
+Removed tree.txt
+Added --stricterror argument
+-Stops script if error is encountered instead of attempting to fix
+-Does not print anything if --silent or -s is used.
+
 15 (15 May 2022) [1.0.3]
 Fixed occasional ZeroDivision issue
 Changed default logging to WARN
@@ -17,7 +34,7 @@ Added -a
 -Prints all results if --verbose is used
 Added __doc__
 Major release (maybe not final)
-__version__ is now using the normal syste for versioning
+__version__ is now using the normal system for versioning
 Added average() function
 
 11 (8 May 2022) [0.4.1]
