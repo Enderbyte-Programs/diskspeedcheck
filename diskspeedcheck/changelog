@@ -1,3 +1,10 @@
+18 (17 May 2022) [1.2.1]
+Fixed grammatic errors in help menu
+Added -r
+-Alias --remain
+-Forces user to press enter before program quits
+-More useful for non-cli windows
+
 17 (16 May 2022) [1.2.0]
 Added negative integer prevention to --size and -si
 Changed from wildcard except to ValueError()

@@ -36,3 +36,5 @@ EXAMPLE: $diskspeedcheck -si -1 --stricterror --silent
 RETURNS: (nothing, as silent was used)
 
 --help (alias /?) Shows help menu and this file (This is the only argument that requires further user interaction before returning to the command line)
+
+-r (alias --remain) Forces user interaction before program quits
