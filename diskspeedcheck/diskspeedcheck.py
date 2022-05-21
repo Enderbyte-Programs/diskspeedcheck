@@ -6,7 +6,7 @@ import logging
 def silent_exc(type,value,traceback):
     sys.exit(1)
 #Package stuff
-__version__ = "1.2.0"
+__version__ = "1.3.0"
 __help__ = """
 Diskspeedcheck is a small utility that helps you check your diskspeed.
 
@@ -47,7 +47,11 @@ RETURNS: 0.0 ERROR Negative values are not allowed!
 EXAMPLE: $diskspeedcheck -si -1 --stricterror --silent
 RETURNS: (nothing, as silent was used)
 
---help (alias /?) Shows help menu and this file (This is the only argument that requires further user interaction before returning to the command line)
+--help (alias /?) Shows this menu (This is the only argument that requires further user interaction before returning to the command line)
+
+-r (alias --remain) Forces user interaction before program quits
+
+--showwarnings (no alias) Shows warnings but not info. Does not activate if --silent is used.
 """
 #Getting arguments and removing filename
 args = sys.argv
@@ -83,11 +87,14 @@ if "-s" in args or "--silent" in args:
     us = False
     sys.excepthook = silent_exc
     logging.basicConfig(level=logging.CRITICAL,format="%(relativeCreated)s %(levelname)s %(message)s")
+elif "--showwarnings" in args:
+    logging.basicConfig(level=logging.WARNING,format="%(relativeCreated)s %(levelname)s %(message)s")
 else:
     us = True
     logging.basicConfig(level=logging.ERROR,format="%(relativeCreated)s %(levelname)s %(message)s")
 if uv and not us:
-    raise RuntimeError("verbose and silent may not be used together!")
+    print("verbose and silent may not be used together!")
+    sys.exit(1)
 se = False
 if "--stricterror" in args:
     se = True
@@ -172,9 +179,9 @@ if "-a" in args:
         aloop = 10
     except ValueError:
         if se:
-            logging.error("Please provide an average value")
             if not us:
-                sys.exit(5)
+                logging.error("Please provide an average value")          
+            sys.exit(5)
         logging.warning("Invalid average value provided, going with 10")
         aloop = 10
     speeds = []
@@ -225,8 +232,8 @@ if "-a" in args:
     logging.info("All tests done")
     print(f"Average speed is {round(average(dspeeds),3)} Mb/s")
     print(f"Average time is {round(average(speeds),3)} ms")
-    print(f"Fastest time was {min(speeds)} ms ({max(dspeeds)} Mb/s)")
-    print(f"Slowest time was {max(speeds)} ms ({min(dspeeds)} Mb/s)")
+    print(f"Fastest time was {min(speeds)} ms ({round(max(dspeeds),3)} Mb/s)")
+    print(f"Slowest time was {max(speeds)} ms ({round(min(dspeeds),3)} Mb/s)")
     if not "--noremove" in args:
         logging.info("Removing file")
         os.remove(assembledname)
@@ -273,4 +280,8 @@ else:
         except ZeroDivisionError:
             logging.warning("Test invalid. Retrying")
 logging.info("Done")
+if "-r" in args or "--remain" in args:
+    print("")
+    input("Press enter when you are ready to quit")
+logging.info("Quitting")
 sys.exit(0)
