@@ -1,3 +1,11 @@
+19 (21 May 2022) [1.3.0]
+Fixed error where excpetion would not throw properly
+Added --showwarnings
+-Shows warnings
+-Does not trigger if --silent
+Fixed bug where --stricterror would not do its job
+-a now uses rounding
+
 18 (17 May 2022) [1.2.1]
 Fixed grammatic errors in help menu
 Added -r
